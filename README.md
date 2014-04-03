@@ -63,7 +63,9 @@ RFEasy adds a simple handshaking protocol to your sent messages, simply by appen
 
 ** It is strongly recommended to set your own handshaking string in the initialise code **
 
-See the advanced example below for how to do that.
+See the advanced example below for how to set a custom handshake.
+
+**Note:** RFEasy will block waiting for a message to arrive with the correct handshake, as this is the desired result in most cases. If you need to be able to configure this behavior, please open an issue asking for it, or make a pull request adding it along with tests. Thank you.
 
 ## (Slightly) Advanced example
 Here is a slightly more advanced example, showing how to set the handshaking protocol.

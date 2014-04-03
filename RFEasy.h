@@ -41,6 +41,7 @@ class RFEasy
     void transmit(String msg);
   private:
     void _construct(int frequency, String handshake, bool log_msgs);
+    String _getMessage();
     void _init();
     void _logln(String msg);
     void _log(String msg);
