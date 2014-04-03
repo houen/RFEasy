@@ -45,10 +45,10 @@ RFEasy has been tested to work with the very common and easy WRL-10534 transmitt
 
 To purchase WRL-10534 and WRL-10532, see below:
 ### US
-- Transmitter: https://www.sparkfun.com/products/10534
-- Receiver: https://www.sparkfun.com/products/10532
+- Transmitter: [From Sparkfun](https://www.sparkfun.com/products/10534)
+- Receiver: [From Sparkfun](https://www.sparkfun.com/products/10532)
 
 
 ### Europe
-- Transmitter: https://www.tinkersoup.de/wireless/rf-link-transmitter-434mhz/a-49/
-- Receiver: https://www.tinkersoup.de/wireless/rf-link-receiver-4800bps-434mhz/a-824/
+- Transmitter: [From Tinkersoup](https://www.tinkersoup.de/wireless/rf-link-transmitter-434mhz/a-49/)
+- Receiver: [From Tinkersoup](https://www.tinkersoup.de/wireless/rf-link-receiver-4800bps-434mhz/a-824/)
