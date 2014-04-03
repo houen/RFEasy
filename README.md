@@ -47,6 +47,8 @@ Grab a cofffe! Pat yourself one the back. The above two sketches is everything y
 ## Max message size
 Please not ethat the maximum message size you can send over RF is 27 characters. So if your handshake is four characters, you can send a message of 23 characters. RFEasy will alert you if your try to send more than 27.
 
+Later versions will have the ability to send one message over multiple transmits, allowing for longer messages.
+
 ## Hardware
 RFEasy has been tested to work with the very common and easy 434 Mhz WRL-10534 transmitter and WRL-10532 receiver, but should function with any transmitter / receiver pair supported by VirtualWire.
 
