@@ -27,13 +27,11 @@ RFEasy aims to help you send messages with Arduino over RF. A string can be sent
     RFEasy listener();
 
     void setup() {
-      Serial.begin(9600);
       listener.init_listener(2); //Receive on pin 2. Can be any pin you want
     }
 
     void loop() {
-      String msg = listener.listen();
-      Serial.println("Listener returned with: " + msg);
+      String message = listener.listen();
     }
 
 Grab a cofffe. The above two sketches is everything you need to have two Arduino's talking to each other.
