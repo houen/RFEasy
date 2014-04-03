@@ -30,9 +30,8 @@ const int led = 13;
 
 const int frequency = 2000;
 const String handshake = "flum";
-const bool logMsgs = false;
 
-RFEasy listener("Listener 1", frequency, handshake, logMsgs);
+RFEasy listener("Listener 1", frequency, handshake);
 
 void setup() {
   Serial.begin(9600);

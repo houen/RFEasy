@@ -32,78 +32,92 @@ const int transmitter_type = 2;
 const String default_name = "RFEasy";
 const int default_frequency = 2000;
 const String default_handshake = "";
+const bool log_msgs = false;
 
-/* RFEasy is an Arduino library to make RF communication as easy as possible
-
-   - name:      The name of this listener / transmitter. 
+/* 
+  RFEasy is an Arduino library to make RF communication as easy as possible
+    
+    - name:      The name of this listener / transmitter. 
                 Used for logging and identification
-   
-   - frequency: The frequency VirtualWire will use to send messages. 
-                Must be the same for transmitter and listener
-   
-   - handshake: A key that the transmitter will send along with the message, which the listener will check for in order to
 
-   - log_msgs:  A bool value determining whether log output will be shown or not
+    - frequency: The frequency VirtualWire will use to send messages. 
+                Must be the same for transmitter and listener
+
+    - handshake: A key that the transmitter will send along with the message, which the listener will check for in order to
+
+    - log_msgs:  A bool value determining whether log output will be shown or not
 */
 
-RFEasy::RFEasy(String name, int frequency, String handshake, bool log_msgs) {
+RFEasy::RFEasy(String name, int frequency, String handshake) {
   _construct(name, frequency, handshake, log_msgs);
 }
-RFEasy::RFEasy(String name, int frequency, String handshake) {
-  _construct(name, frequency, handshake, false);
-}
 RFEasy::RFEasy(String name, int frequency) {
-  _construct(name, frequency, default_handshake, false);
+  _construct(name, frequency, default_handshake, log_msgs);
 }
 RFEasy::RFEasy(String name) {
-  _construct(name, default_frequency, default_handshake, false);
+  _construct(name, default_frequency, default_handshake, log_msgs);
 }
 RFEasy::RFEasy() {
+  _construct(default_name, default_frequency, default_handshake, log_msgs);
 }
 
+/* 
+  Initialise as a listener. Must be done in the setup() function
+*/
 void RFEasy::init_listener(int pin) {
-  _init();
-  vw_set_rx_pin(pin);
-  vw_rx_start();
-  _type = listener_type;
-  _logln("init");
+  _init(); //Initialization common to both transmitter and listener
+  vw_set_rx_pin(pin); // Set transmit pin in VirtualWire
+  vw_rx_start(); // Init as listener with VirtualWire
+  _type = listener_type; // Set the type to listener
+  //_logln("init"); //DEBUG
 }
 
+/* 
+  Initialise as a transmitter. Must be done in the setup() method
+*/
 void RFEasy::init_transmitter(int pin) {
-  _init();
-  vw_set_tx_pin(pin);
-  _type = transmitter_type;
-  _logln("init");
+  _init(); //Initialization common to both transmitter and listener
+  vw_set_tx_pin(pin); // Set listen pin in VirtualWire
+  _type = transmitter_type; // Set the type to transmitter
+  //_logln("init"); //DEBUG
 }
 
+/*
+  Transmit a message. Used in the loop() method
+*/
 void RFEasy::transmit(String msg) {
   if(_type == transmitter_type) {
     char transmitCharArr[msg.length()];  msg.toCharArray(transmitCharArr, msg.length() + 1);
     vw_send((uint8_t *)transmitCharArr, strlen(transmitCharArr));
     vw_wait_tx();
-    _logln("transmitted '" + msg + "'");      
+    //_logln("transmitted '" + msg + "'"); //DEBUG    
   }
   else {
-    _logln("Is not initialized as a transmitter. Please call init_transmitter first");  
+    //_logln("Is not initialized as a transmitter. Please call init_transmitter first");  
   }
 }
 
+/*
+  Listen for an incoming message. Used in the loop() method
+
+  - return: Returns received message as a string. Returns empty string if no message was received
+*/
 String RFEasy::listen() {
-  String msg = "";
+  String msg = ""; //Return message string variable
   if(_type == listener_type) {
-    uint8_t buflen = VW_MAX_MESSAGE_LEN;
-    uint8_t buf[buflen];    
-    if(vw_get_message(buf, &buflen)) {      
-      for(int i = 0; i < buflen; i++) {        
-        char c = char(buf[i]);
-        msg = msg + c;
+    uint8_t buflen = VW_MAX_MESSAGE_LEN; //Set buffer length to maximum for VirtualWire
+    uint8_t buf[buflen]; //Initialise char array of size buffer length
+    if(vw_get_message(buf, &buflen)) { //Get message from VirtualWire, scaling buffer length down to message size
+      for(int i = 0; i < buflen; i++) { //Loop through all characters in the buffer
+        char c = char(buf[i]); //Get character
+        msg = msg + c; //Concatenate to string
       }    
-      _logln("received '" + msg + "'");
+      //_logln("received '" + msg + "'"); //DEBUG
     }
     return msg;
   }
   else {
-    _logln("Is not initialized as a listener. Please call init_listener first.");    
+    //_logln("Is not initialized as a listener. Please call init_listener first."); //DEBUG    
   }
   return msg;
 }
@@ -122,6 +136,7 @@ void RFEasy::_init() {
   vw_setup(_rx_frequency);
 }
 
+/*
 void RFEasy::_logln(String msg) {
   if(_log_msgs) {
     _log(msg + "\r\n");
@@ -133,3 +148,4 @@ void RFEasy::_log(String msg) {
     Serial.print("[" + _name + "] " + msg);  
   }
 }
+*/
