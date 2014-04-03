@@ -36,6 +36,8 @@ RFEasy aims to help you send messages with Arduino over RF. A string can be sent
       Serial.println("Listener returned with: " + msg);
     }
 
+That's it! The above two sketches is everything you need to have two Arduino's talking to each other.
+
 ## Installation
 - [Download as a zip file](https://github.com/houen/RFEasy/archive/master.zip), or Git clone this github repository in your Arduino Library folder. See the official guide on [Installing Additional Arduino Libraries](http://arduino.cc/en/Guide/Libraries) for more details.
 
