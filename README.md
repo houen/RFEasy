@@ -27,13 +27,13 @@ RFEasy aims to help you send messages with Arduino over RF. Instead of dealing w
     RFEasy listener();
 
     void setup() {
-      Serial.begin(9600); // To show the sent message in Serial console
+      Serial.begin(9600);
       listener.init_listener(2); //Pin 2
     }
 
     void loop() {
       String msg = listener.listen();
-      Serial.println("Listener returned with: " + msg); // To show the sent message in Serial console
+      Serial.println("Listener returned with: " + msg);
     }
 
 ## Installation
