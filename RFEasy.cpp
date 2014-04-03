@@ -36,9 +36,6 @@ const bool log_msgs = true;
 
 /* 
   RFEasy is an Arduino library to make RF communication as easy as possible
-    
-    - name:      The name of this listener / transmitter. 
-                Used for logging and identification
 
     - frequency: The frequency VirtualWire will use to send messages. 
                 Must be the same for transmitter and listener
@@ -48,17 +45,14 @@ const bool log_msgs = true;
     - log_msgs:  A bool value determining whether log output will be shown or not
 */
 
-RFEasy::RFEasy(String name, int frequency, String handshake) {
-  _construct(name, frequency, handshake, log_msgs);
+RFEasy::RFEasy(int frequency, String handshake) {
+  _construct(frequency, handshake, log_msgs);
 }
-RFEasy::RFEasy(String name, int frequency) {
-  _construct(name, frequency, default_handshake, log_msgs);
-}
-RFEasy::RFEasy(String name) {
-  _construct(name, default_frequency, default_handshake, log_msgs);
+RFEasy::RFEasy(int frequency) {
+  _construct(frequency, default_handshake, log_msgs);
 }
 RFEasy::RFEasy() {
-  _construct(default_name, default_frequency, default_handshake, log_msgs);
+  _construct(default_frequency, default_handshake, log_msgs);
 }
 
 /* 
@@ -130,8 +124,7 @@ String RFEasy::listen() {
 
 //private
 
-void RFEasy::_construct(String name, int frequency, String handshake, bool log_msgs) {
-  _name = name;
+void RFEasy::_construct(int frequency, String handshake, bool log_msgs) {
   _rx_frequency = frequency;  
   _handshake = handshake;  
   _type = 0; //1 = Listener, 2 = transmitter
@@ -151,7 +144,7 @@ void RFEasy::_logln(String msg) {
 
 void RFEasy::_log(String msg) {
   if(_log_msgs) {
-    Serial.print("[" + _name + "] " + msg);  
+    Serial.print("[" + _type + "] " + msg);  
   }
 }
 */

@@ -32,17 +32,15 @@
 class RFEasy
 {
   public:
-    RFEasy(String name, int frequency, String handshake, bool log_msgs);
-    RFEasy(String name, int frequency, String handshake);
-    RFEasy(String name, int frequency);
-    RFEasy(String name);
+    RFEasy(int frequency, String handshake);
+    RFEasy(int frequency);
     RFEasy();
     void init_listener(int pin);
     void init_transmitter(int pin);
     String listen();
     void transmit(String msg);
   private:
-    void _construct(String name, int frequency, String handshake, bool log_msgs);
+    void _construct(int frequency, String handshake, bool log_msgs);
     void _init();
     void _logln(String msg);
     void _log(String msg);
