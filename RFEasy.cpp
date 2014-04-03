@@ -32,7 +32,6 @@ const int transmitter_type = 2;
 const String default_name = "RFEasy";
 const int default_frequency = 2000;
 const String default_handshake = "***";
-const bool log_msgs = true;
 
 /* 
   RFEasy is an Arduino library to make RF communication as easy as possible
@@ -46,13 +45,13 @@ const bool log_msgs = true;
 */
 
 RFEasy::RFEasy(int frequency, String handshake) {
-  _construct(frequency, handshake, log_msgs);
+  _construct(frequency, handshake);
 }
 RFEasy::RFEasy(int frequency) {
-  _construct(frequency, default_handshake, log_msgs);
+  _construct(frequency, default_handshake);
 }
 RFEasy::RFEasy() {
-  _construct(default_frequency, default_handshake, log_msgs);
+  _construct(default_frequency, default_handshake);
 }
 
 /* 
@@ -63,7 +62,6 @@ void RFEasy::init_listener(int pin) {
   vw_set_rx_pin(pin); // Set transmit pin in VirtualWire
   vw_rx_start(); // Init as listener with VirtualWire
   _type = listener_type; // Set the type to listener
-  //_logln("init"); //DEBUG
 }
 
 /* 
@@ -73,22 +71,27 @@ void RFEasy::init_transmitter(int pin) {
   _init(); //Initialization common to both transmitter and listener
   vw_set_tx_pin(pin); // Set listen pin in VirtualWire
   _type = transmitter_type; // Set the type to transmitter
-  //_logln("init"); //DEBUG
 }
 
 /*
-  Transmit a message. Used in the loop() method
+  Transmit a message. Used in the loop() method.
+  Maximum number of characters that can be transmitted
+  is 27 including the handshake.
 */
 void RFEasy::transmit(String msg) {
   if(_type == transmitter_type) {
     msg = msg + _handshake;
-    char transmitCharArr[msg.length()];  msg.toCharArray(transmitCharArr, msg.length() + 1);
-    vw_send((uint8_t *)transmitCharArr, strlen(transmitCharArr));
-    vw_wait_tx();
-    //_logln("transmitted '" + msg + "'"); //DEBUG    
+    if(msg.length > 27) {
+      Serial.println("Message is more than 27 characters and cannot be transmitted")
+    }
+    else {
+      char transmitCharArr[msg.length()];  msg.toCharArray(transmitCharArr, msg.length() + 1);
+      vw_send((uint8_t *)transmitCharArr, strlen(transmitCharArr));
+      vw_wait_tx();
+    }    
   }
   else {
-    //_logln("Is not initialized as a transmitter. Please call init_transmitter first");  
+    Serial.println("Is not initialized as a transmitter. Please call init_transmitter first."); //DEBUG
   }
 }
 
@@ -101,15 +104,15 @@ String RFEasy::listen() {
   if(_type == listener_type) {
     String out = ""; //Return message string variable
     String msg = ""; //Variable for storing the received message (with handshake) in
-    while(!msg.endsWith(_handshake)) {
+    //while(!msg.endsWith(_handshake)) {
       msg = _getMessage();        
-    }
+    //}
     int len = msg.length();
     out = msg.substring(0, len - _handshake.length());
     return out;
   }
   else {
-    Serial.println("Is not initialized as a listener. Please call init_listener first."); //DEBUG    
+    Serial.println("Is not initialized as a listener. Please call init_listener first."); //DEBUG
   }
 }
 
@@ -125,33 +128,16 @@ String RFEasy::_getMessage() {
       char c = char(buf[i]); //Get character
       msg = msg + c; //Concatenate to string
     }
-    //_logln("received '" + msg + "'"); //DEBUG
-    //_logln((String)msg.endsWith(_handshake)); //DEBUG      
   }
   return msg;
 }
 
-void RFEasy::_construct(int frequency, String handshake, bool log_msgs) {
+void RFEasy::_construct(int frequency, String handshake) {
   _rx_frequency = frequency;  
   _handshake = handshake;  
   _type = 0; //1 = Listener, 2 = transmitter
-  _log_msgs = log_msgs;
 }
 
 void RFEasy::_init() {
   vw_setup(_rx_frequency);
 }
-
-/*
-void RFEasy::_logln(String msg) {
-  if(_log_msgs) {
-    _log(msg + "\r\n");
-  }
-}
-
-void RFEasy::_log(String msg) {
-  if(_log_msgs) {
-    Serial.print("[" + _type + "] " + msg);  
-  }
-}
-*/

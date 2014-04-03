@@ -40,7 +40,7 @@ class RFEasy
     String listen();
     void transmit(String msg);
   private:
-    void _construct(int frequency, String handshake, bool log_msgs);
+    void _construct(int frequency, String handshake);
     String _getMessage();
     void _init();
     void _logln(String msg);
