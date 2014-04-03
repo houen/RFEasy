@@ -2,7 +2,7 @@
 A lightweight Arduino library to make RF communication as easy as possible.
 
 ## Usage
-RFEasy aims to help you send messages with Arduino over RF. Instead of dealing with VirtualWire, a string can be sent and received as easily as below:
+RFEasy aims to help you send messages with Arduino over RF. A string can be sent and received wirelessly as easily as below:
 
 #### Transmitter Arduino sketch
 
