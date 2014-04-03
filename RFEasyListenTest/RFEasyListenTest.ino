@@ -29,7 +29,7 @@
 const int led = 13;
 
 const int frequency = 2000;
-const String handshake = "flum";
+const String handshake = "=/*RFEasy*//=";
 
 RFEasy listener("Listener 1", frequency, handshake);
 

@@ -31,8 +31,8 @@ const int listener_type = 1;
 const int transmitter_type = 2;
 const String default_name = "RFEasy";
 const int default_frequency = 2000;
-const String default_handshake = "";
-const bool log_msgs = false;
+const String default_handshake = "=/*RFE*/=";
+const bool log_msgs = true;
 
 /* 
   RFEasy is an Arduino library to make RF communication as easy as possible
@@ -87,6 +87,7 @@ void RFEasy::init_transmitter(int pin) {
 */
 void RFEasy::transmit(String msg) {
   if(_type == transmitter_type) {
+    msg = msg + _handshake;
     char transmitCharArr[msg.length()];  msg.toCharArray(transmitCharArr, msg.length() + 1);
     vw_send((uint8_t *)transmitCharArr, strlen(transmitCharArr));
     vw_wait_tx();
@@ -103,23 +104,28 @@ void RFEasy::transmit(String msg) {
   - return: Returns received message as a string. Returns empty string if no message was received
 */
 String RFEasy::listen() {
-  String msg = ""; //Return message string variable
-  if(_type == listener_type) {
+  String out = ""; //Return message string variable
+  if(_type == listener_type) {    
     uint8_t buflen = VW_MAX_MESSAGE_LEN; //Set buffer length to maximum for VirtualWire
     uint8_t buf[buflen]; //Initialise char array of size buffer length
-    if(vw_get_message(buf, &buflen)) { //Get message from VirtualWire, scaling buffer length down to message size
+    String msg = ""; //Variable for storing the received message (with handshake) in
+    if(vw_get_message(buf, &buflen)) { //Get message from VirtualWire, scaling buffer length down to message size      
       for(int i = 0; i < buflen; i++) { //Loop through all characters in the buffer
         char c = char(buf[i]); //Get character
         msg = msg + c; //Concatenate to string
       }    
       //_logln("received '" + msg + "'"); //DEBUG
     }
-    return msg;
+    //_logln((String)msg.endsWith(_handshake)); //DEBUG
+    if(msg.endsWith(_handshake)) {
+      int len = msg.length();
+      out = msg.substring(0, len - _handshake.length());  
+    }
   }
   else {
     //_logln("Is not initialized as a listener. Please call init_listener first."); //DEBUG    
   }
-  return msg;
+  return out;
 }
 
 //private

@@ -29,10 +29,9 @@
 const int led = 13;
 
 const int frequency = 2000;
-const String handshake = "flum";
-const bool logMsgs = true;
+const String handshake = "=/*RFEasy*//=";
 
-RFEasy transmitter("Transmitter 1", frequency, handshake, logMsgs);
+RFEasy transmitter("Transmitter 1", frequency, handshake);
 
 void setup() {
   Serial.begin(9600);
