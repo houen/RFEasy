@@ -1,5 +1,5 @@
 # RFEasy
-A lightweight Arduino library to make RF communication as easy as possible.
+An Arduino library to make RF communication as easy as possible.
 
 ## Usage
 RFEasy aims to help you send messages with Arduino over RF. A string can be sent and received wirelessly as easily as below:
