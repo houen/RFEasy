@@ -10,7 +10,7 @@ RFEasy aims to help you send messages with Arduino over RF. A string can be sent
     #include "Arduino.h"
     #include <RFEasy.h>
 
-    RFEasy transmitter();
+    RFEasy transmitter;
 
     void setup() {
       transmitter.init_transmitter(7); //Transmit on pin 7. Can be any pin you want
@@ -25,17 +25,19 @@ RFEasy aims to help you send messages with Arduino over RF. A string can be sent
     #include "Arduino.h"
     #include <RFEasy.h>
 
-    RFEasy listener();
+    RFEasy listener;
 
     void setup() {
+      Serial.begin(9600); //For debug printing
       listener.init_listener(2); //Receive on pin 2. Can be any pin you want
     }
 
     void loop() {
       String message = listener.listen();
+      Serial.println(message); //Print out response
     }
 
-**See also the advanced example below**
+**Note:** This example does not set a custom Handshaking protocol. Please also see Handshaking section, and (slightly) more advanced example below.
 
 Grab a cofffe. The above two sketches is everything you need to have two Arduino's talking to each other.
 
@@ -63,22 +65,32 @@ RFEasy adds a simple handshaking protocol to your sent messages, simply by appen
 
 See the advanced example below for how to do that.
 
-## Advanced example
-RFEasy aims to help you send messages with Arduino over RF. A string can be sent and received wirelessly as easily as below:
+## (Slightly) Advanced example
+Here is a slightly more advanced example, showing how to set the handshaking protocol.
 
 #### Transmitter Arduino sketch
 
     #include "Arduino.h"
     #include <RFEasy.h>
 
-    RFEasy transmitter();
+    const int led = 13;
+
+    const int frequency = 2000;
+    const String handshake = "=/*RFEasy*//=";
+
+    RFEasy transmitter(frequency, handshake);
 
     void setup() {
-      transmitter.init_transmitter(7); //Transmit on pin 7. Can be any pin you want
+      Serial.begin(9600);
+      pinMode(led, OUTPUT);
+      transmitter.init_transmitter(7);
     }
 
     void loop() {
+      digitalWrite(led, LOW);
       transmitter.transmit("Hello World");
+      digitalWrite(led, HIGH);  
+      delay(100);
     }
 
 #### Receiver Arduino sketch
@@ -86,12 +98,23 @@ RFEasy aims to help you send messages with Arduino over RF. A string can be sent
     #include "Arduino.h"
     #include <RFEasy.h>
 
-    RFEasy listener();
+    const int led = 13;
+
+    const int frequency = 2000;
+    const String handshake = "=/*RFEasy*//=";
+
+    RFEasy listener(frequency, handshake);
 
     void setup() {
-      listener.init_listener(2); //Receive on pin 2. Can be any pin you want
+      Serial.begin(9600);
+      pinMode(led, OUTPUT);
+      listener.init_listener(2);
     }
 
     void loop() {
-      String message = listener.listen();
+      digitalWrite(led, LOW);
+      String msg = listener.listen();
+      Serial.println("Listener returned with: " + msg);
+      digitalWrite(led, HIGH);
+      delay(100);
     }
