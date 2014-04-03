@@ -31,7 +31,7 @@ const int listener_type = 1;
 const int transmitter_type = 2;
 const String default_name = "RFEasy";
 const int default_frequency = 2000;
-const String default_handshake = "=/*RFE*/=";
+const String default_handshake = "***";
 const bool log_msgs = true;
 
 /* 

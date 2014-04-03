@@ -55,3 +55,43 @@ To purchase WRL-10534 and WRL-10532, see below:
 ### Europe
 - Transmitter: [From Tinkersoup](https://www.tinkersoup.de/wireless/rf-link-transmitter-434mhz/a-49/)
 - Receiver: [From Tinkersoup](https://www.tinkersoup.de/wireless/rf-link-receiver-4800bps-434mhz/a-824/)
+
+## Handshaking
+RFEasy adds a simple handshaking protocol to your sent messages, simply by appending a preset string to all messages you send. This allows you to set your own handshake string and thus avoid receiving messages in your code that was not sent by your transmitter.
+
+** It is strongly recommended to set your own handshaking string in the initialise code **
+
+See the advanced example below for how to do that.
+
+## Advanced example
+RFEasy aims to help you send messages with Arduino over RF. A string can be sent and received wirelessly as easily as below:
+
+#### Transmitter Arduino sketch
+
+    #include "Arduino.h"
+    #include <RFEasy.h>
+
+    RFEasy transmitter();
+
+    void setup() {
+      transmitter.init_transmitter(7); //Transmit on pin 7. Can be any pin you want
+    }
+
+    void loop() {
+      transmitter.transmit("Hello World");
+    }
+
+#### Receiver Arduino sketch
+
+    #include "Arduino.h"
+    #include <RFEasy.h>
+
+    RFEasy listener();
+
+    void setup() {
+      listener.init_listener(2); //Receive on pin 2. Can be any pin you want
+    }
+
+    void loop() {
+      String message = listener.listen();
+    }
