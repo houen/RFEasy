@@ -37,6 +37,7 @@ RFEasy aims to help you send messages with Arduino over RF. Instead of dealing w
     }
 
 ## Installation
+- [Download as a zip file](https://github.com/houen/RFEasy/archive/master.zip), or Git clone this github repository in your Arduino Library folder
 
 
 ## Hardware
