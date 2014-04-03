@@ -41,7 +41,7 @@ RFEasy aims to help you send messages with Arduino over RF. Instead of dealing w
 
 
 ## Hardware
-RFEasy has been tested to work with the very common WRL-10534 transmitter and WRL-10532 receiver, but should function with any transmitter / receiver pair supported by VirtualWire.
+RFEasy has been tested to work with the very common and easy WRL-10534 transmitter and WRL-10532 receiver, but should function with any transmitter / receiver pair supported by VirtualWire.
 
 To purchase WRL-10534 and WRL-10532, see below:
 ### US
