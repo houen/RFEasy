@@ -2,6 +2,7 @@
 An Arduino library to make RF communication as easy as possible.
 
 ## Usage
+### Simple example
 RFEasy aims to help you send messages with Arduino over RF. A string can be sent and received wirelessly as easily as below:
 
 #### Transmitter Arduino sketch
@@ -33,6 +34,8 @@ RFEasy aims to help you send messages with Arduino over RF. A string can be sent
     void loop() {
       String message = listener.listen();
     }
+
+*See also the advanced example below*
 
 Grab a cofffe. The above two sketches is everything you need to have two Arduino's talking to each other.
 
