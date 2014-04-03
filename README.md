@@ -44,6 +44,8 @@ Grab a cofffe! Pat yourself one the back. The above two sketches is everything y
 ## Installation
 - [Download as a zip file](https://github.com/houen/RFEasy/archive/master.zip), or Git clone this github repository in your Arduino Library folder. See the official guide on [Installing Additional Arduino Libraries](http://arduino.cc/en/Guide/Libraries) for more details.
 
+## Max message size
+Please not ethat the maximum message size you can send over RF is 27 characters. So if your handshake is four characters, you can send a message of 23 characters. RFEasy will alert you if your try to send more than 27.
 
 ## Hardware
 RFEasy has been tested to work with the very common and easy 434 Mhz WRL-10534 transmitter and WRL-10532 receiver, but should function with any transmitter / receiver pair supported by VirtualWire.
@@ -68,7 +70,7 @@ See the advanced example below for how to set a custom handshake.
 **Note:** RFEasy will block waiting for a message to arrive with the correct handshake, as this is the desired result in most cases. If you need to be able to configure this behavior, please open an issue asking for it, or make a pull request adding it along with tests. Thank you.
 
 ## (Slightly) Advanced example
-Here is a slightly more advanced example, showing how to set the handshaking protocol.
+Here is a slightly more advanced example, showing how to set the frequency and handshaking protocol.
 
 #### Transmitter Arduino sketch
 
