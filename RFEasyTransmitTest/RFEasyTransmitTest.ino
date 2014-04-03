@@ -26,6 +26,8 @@
 #include "Arduino.h"
 #include <RFEasy.h>
 
+const int led = 13;
+
 const int frequency = 2000;
 const String handshake = "flum";
 const bool logMsgs = true;
@@ -34,10 +36,13 @@ RFEasy transmitter("Transmitter 1", frequency, handshake, logMsgs);
 
 void setup() {
   Serial.begin(9600);
+  pinMode(led, OUTPUT);
   transmitter.init_transmitter(7);
 }
 
 void loop() {
+  digitalWrite(led, LOW);
   transmitter.transmit("Hello World");
+  digitalWrite(led, HIGH);  
   delay(100);
 }

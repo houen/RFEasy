@@ -33,6 +33,19 @@ const String default_name = "RFEasy";
 const int default_frequency = 2000;
 const String default_handshake = "";
 
+/* RFEasy is an Arduino library to make RF communication as easy as possible
+
+   - name:      The name of this listener / transmitter. 
+                Used for logging and identification
+   
+   - frequency: The frequency VirtualWire will use to send messages. 
+                Must be the same for transmitter and listener
+   
+   - handshake: A key that the transmitter will send along with the message, which the listener will check for in order to
+
+   - log_msgs:  A bool value determining whether log output will be shown or not
+*/
+
 RFEasy::RFEasy(String name, int frequency, String handshake, bool log_msgs) {
   _construct(name, frequency, handshake, log_msgs);
 }
@@ -75,23 +88,24 @@ void RFEasy::transmit(String msg) {
   }
 }
 
-void RFEasy::listen() {
+String RFEasy::listen() {
+  String msg = "";
   if(_type == listener_type) {
     uint8_t buflen = VW_MAX_MESSAGE_LEN;
-    uint8_t buf[buflen];
-    
-    if(vw_get_message(buf, &buflen)) {
-      String full = "";
+    uint8_t buf[buflen];    
+    if(vw_get_message(buf, &buflen)) {      
       for(int i = 0; i < buflen; i++) {        
         char c = char(buf[i]);
-        full = full + c;
+        msg = msg + c;
       }    
-      _logln("received '" + full + "'");
+      _logln("received '" + msg + "'");
     }
+    return msg;
   }
   else {
-    _logln("Is not initialized as a listener. Please call init_listener first.");
+    _logln("Is not initialized as a listener. Please call init_listener first.");    
   }
+  return msg;
 }
 
 //private

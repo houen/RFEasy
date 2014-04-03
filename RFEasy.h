@@ -39,7 +39,7 @@ class RFEasy
     RFEasy();
     void init_listener(int pin);
     void init_transmitter(int pin);
-    void listen();
+    String listen();
     void transmit(String msg);
   private:
     void _construct(String name, int frequency, String handshake, bool log_msgs);

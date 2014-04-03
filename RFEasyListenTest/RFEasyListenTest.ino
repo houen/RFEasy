@@ -26,17 +26,25 @@
 #include "Arduino.h"
 #include <RFEasy.h>
 
+const int led = 13;
+
 const int frequency = 2000;
 const String handshake = "flum";
-const bool logMsgs = true;
+const bool logMsgs = false;
 
 RFEasy listener("Listener 1", frequency, handshake, logMsgs);
 
 void setup() {
   Serial.begin(9600);
+  pinMode(led, OUTPUT);
   listener.init_listener(2);
 }
 
 void loop() {
-  listener.listen();
+  delay(100);
+  digitalWrite(led, LOW);
+  String msg = listener.listen();
+  Serial.println("Listener returned with: " + msg);
+  digitalWrite(led, HIGH);
+  delay(100);
 }
