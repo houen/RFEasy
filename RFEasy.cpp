@@ -99,27 +99,28 @@ void RFEasy::transmit(String msg) {
 */
 String RFEasy::listen() {
   String out = ""; //Return message string variable
-  if(_type == listener_type) {    
+  //if(_type == listener_type) {    
     uint8_t buflen = VW_MAX_MESSAGE_LEN; //Set buffer length to maximum for VirtualWire
     uint8_t buf[buflen]; //Initialise char array of size buffer length
     String msg = ""; //Variable for storing the received message (with handshake) in
+    vw_wait_rx();
     if(vw_get_message(buf, &buflen)) { //Get message from VirtualWire, scaling buffer length down to message size      
       for(int i = 0; i < buflen; i++) { //Loop through all characters in the buffer
         char c = char(buf[i]); //Get character
         msg = msg + c; //Concatenate to string
       }    
       //_logln("received '" + msg + "'"); //DEBUG
-    }
-    //_logln((String)msg.endsWith(_handshake)); //DEBUG
-    if(msg.endsWith(_handshake)) {
-      int len = msg.length();
-      out = msg.substring(0, len - _handshake.length());  
-    }
-  }
+      //_logln((String)msg.endsWith(_handshake)); //DEBUG
+      if(msg.endsWith(_handshake)) {
+        int len = msg.length();
+        out = msg.substring(0, len - _handshake.length());  
+      }
+      return out;
+    }    
+  /*}
   else {
     //_logln("Is not initialized as a listener. Please call init_listener first."); //DEBUG    
-  }
-  return out;
+  }*/
 }
 
 //private
