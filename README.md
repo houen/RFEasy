@@ -12,7 +12,7 @@ RFEasy aims to help you send messages with Arduino over RF. Instead of dealing w
     RFEasy transmitter();
 
     void setup() {
-      transmitter.init_transmitter(7); //Pin 7
+      transmitter.init_transmitter(7); //Transmit on pin 7. Can be any pin you want
     }
 
     void loop() {
@@ -28,7 +28,7 @@ RFEasy aims to help you send messages with Arduino over RF. Instead of dealing w
 
     void setup() {
       Serial.begin(9600);
-      listener.init_listener(2); //Pin 2
+      listener.init_listener(2); //Receive on pin 2. Can be any pin you want
     }
 
     void loop() {
