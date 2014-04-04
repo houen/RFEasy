@@ -45,7 +45,7 @@ Grab a coffee! Pat yourself on the back. The above two sketches is everything yo
 - [Download as a zip file](https://github.com/houen/RFEasy/archive/master.zip), or Git clone this github repository in your Arduino Library folder. See the official guide on [Installing Additional Arduino Libraries](http://arduino.cc/en/Guide/Libraries) for more details.
 
 ## Max message size
-Please not ethat the maximum message size you can send over RF is 27 characters. So if your handshake is four characters, you can send a message of 23 characters. RFEasy will alert you if your try to send more than 27.
+Please note that the maximum message size you can send over RF is 27 characters. So if your handshake is four characters, you can send a message of 23 characters. RFEasy will alert you if your try to send more than 27.
 
 Later versions will have the ability to send one message over multiple transmits, allowing for longer messages.
 
