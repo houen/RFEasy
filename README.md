@@ -1,5 +1,5 @@
 # RFEasy
-An Arduino library to make RF communication as easy as possible.
+An Arduino library to make sending messages as strings over RF communication as easy as possible.
 
 ## Usage
 ### Simple example
@@ -39,13 +39,13 @@ RFEasy aims to help you send messages with Arduino over RF. A string can be sent
 
 **Note:** This example does not set a custom Handshaking protocol. Please also see Handshaking section, and (slightly) more advanced example below.
 
-Grab a cofffe! Pat yourself one the back. The above two sketches is everything you need to have two Arduino's talking to each other. You should add a little handshaking though. Should take about a minute more.
+Grab a coffee! Pat yourself on the back. The above two sketches is everything you need to have two Arduinos talking to each other. You should add a little handshaking though. It will take about a minute more.
 
 ## Installation
 - [Download as a zip file](https://github.com/houen/RFEasy/archive/master.zip), or Git clone this github repository in your Arduino Library folder. See the official guide on [Installing Additional Arduino Libraries](http://arduino.cc/en/Guide/Libraries) for more details.
 
 ## Max message size
-Please not ethat the maximum message size you can send over RF is 27 characters. So if your handshake is four characters, you can send a message of 23 characters. RFEasy will alert you if your try to send more than 27.
+Please note that the maximum message size you can send over RF is 27 characters. So if your handshake is four characters, you can send a message of 23 characters. RFEasy will alert you if your try to send more than 27.
 
 Later versions will have the ability to send one message over multiple transmits, allowing for longer messages.
 
