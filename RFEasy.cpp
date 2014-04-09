@@ -81,8 +81,8 @@ void RFEasy::init_transmitter(int pin) {
 void RFEasy::transmit(String msg) {
   if(_type == transmitter_type) {
     msg = msg + _handshake;
-    if(msg.length > 27) {
-      Serial.println("Message is more than 27 characters and cannot be transmitted")
+    if(msg.length() > 27) {
+      Serial.println("Message is more than 27 characters and cannot be transmitted");
     }
     else {
       char transmitCharArr[msg.length()];  msg.toCharArray(transmitCharArr, msg.length() + 1);
