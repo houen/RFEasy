@@ -82,7 +82,7 @@ Here is a slightly more advanced example, showing how to set the frequency and h
     const int led = 13;
 
     const int frequency = 2000;
-    const String handshake = "=/*RFEasy*//=";
+    const String handshake = "|RFE.0.0.1|";
 
     RFEasy transmitter(frequency, handshake);
 
