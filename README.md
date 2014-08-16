@@ -65,7 +65,7 @@ To purchase WRL-10534 and WRL-10532, see below:
 ## Handshaking
 RFEasy adds a simple handshaking protocol to your sent messages, simply by appending a preset string to all messages you send. This allows you to set your own handshake string and thus avoid receiving messages in your code that was not sent by your transmitter.
 
-** It is strongly recommended to set your own handshaking string in the initialise code **
+**It is strongly recommended to set your own handshaking string in the initialise code**
 
 See the advanced example below for how to set a custom handshake.
 
