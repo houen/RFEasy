@@ -33,7 +33,7 @@ RFEasy aims to help you send messages with Arduino over RF. A string can be sent
     }
 
     void loop() {
-      String message = listener.listen();
+      String message = listener.listen(); // .listen() is a blocking call. The below code will first run when a message is received
       Serial.println(message); //Print out response
     }
 
