@@ -1,5 +1,5 @@
 # RFEasy
-An Arduino library to make sending messages as strings over RF communication as easy as possible.
+An Arduino library to make sending messages as strings over RF communication as easy as possible. The library includes a handshaking protocol that allows multiple units to transmit/receive in the same area at the same time.
 
 ## Usage
 ### Simple example
