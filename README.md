@@ -125,6 +125,9 @@ Here is a slightly more advanced example, showing how to set the frequency and h
       delay(100);
     }
 
+##Acknowledgements
+Very many heartfelt thanks to Mike McCauley for his amazing VirtualWire library: http://www.airspayce.com/mikem/arduino/VirtualWire/
+
 ## License
 ### Open Source Licensing GPL V2
 This software is distributed under the Open Source Licensing GPL V2.
