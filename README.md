@@ -13,7 +13,7 @@ RFEasy aims to help you send messages with Arduino over RF. A string can be sent
     RFEasy transmitter;
 
     void setup() {
-      transmitter.init_transmitter(7); //Transmit on pin 7. Can be any pin you want
+      transmitter.init_transmitter(7); //Transmit on pin 7. Can be any digital pin
     }
 
     void loop() {
@@ -29,7 +29,7 @@ RFEasy aims to help you send messages with Arduino over RF. A string can be sent
 
     void setup() {
       Serial.begin(9600); //For debug printing
-      listener.init_listener(2); //Receive on pin 2. Can be any pin you want
+      listener.init_listener(2); //Receive on pin 2. Can be any digital pin
     }
 
     void loop() {
