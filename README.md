@@ -1,5 +1,5 @@
 # RFEasy
-Arduino library trying to make sending messages as strings over RF communication as easy as possible. The library includes a handshaking protocol that allows multiple units to transmit/receive in the same area at the same time.
+Arduino library to make sending messages as strings over RF communication easy. The library includes a handshaking protocol that allows multiple units to transmit/receive in the same area at the same time.
 
 ## Usage
 ### Simple example
@@ -126,7 +126,7 @@ Here is a slightly more advanced example, showing how to set the frequency and h
     }
 
 ##Acknowledgements
-Very many heartfelt thanks to Mike McCauley for his amazing VirtualWire library: http://www.airspayce.com/mikem/arduino/VirtualWire/
+Many thanks to Mike McCauley for his amazing VirtualWire library: http://www.airspayce.com/mikem/arduino/VirtualWire/
 
 ## License
 ### Open Source Licensing GPL V2
